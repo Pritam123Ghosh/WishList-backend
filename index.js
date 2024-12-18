@@ -7,6 +7,7 @@ import messageRouter from './src/routes/message.route.js';
 connectDB();
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 //Connect to server
 app.listen(3000, () => {
