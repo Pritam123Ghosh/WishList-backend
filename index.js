@@ -3,6 +3,7 @@ import connectDB from './src/db/dbconnection.js';
 import userRouter from './src/routes/user.route.js';
 import authRouter from './src/routes/auth.route.js';
 import messageRouter from './src/routes/message.route.js';
+import cors from 'cors'; // Import the cors module
 //Connect to DB
 connectDB();
 
