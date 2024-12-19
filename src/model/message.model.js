@@ -10,6 +10,15 @@ const MessageSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    role: {
+        type: String,
+        enum: ["he", "she"], // Specifies the creator of the wish
+        required: true,
+    },
+    isAchieved: {
+        type: Boolean,
+        default: false, // Default is unachieved
+    },
 
 }, { timestamps: true });
 
