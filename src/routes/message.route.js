@@ -8,6 +8,6 @@ router.get("/getAllMessages", protect, getAllMessages); // Get all messages for 
 router.get("/getMessage/:id", protect, getMessage); // Get a specific message by ID for the logged-in user
 router.put("/updateMessage/:id", protect, updateMessage); // Update a message
 router.delete("/deleteMessage/:id", protect, deleteMessage); // Delete a message
-router.put("/messages/:id/achieve", achieveMessage);
-router.get("/messages/achieved", getAchievedMessages);
+router.put("/:id/achieve", achieveMessage);
+router.get("/achieved", getAchievedMessages);
 export default router;
