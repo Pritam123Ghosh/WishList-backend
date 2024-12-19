@@ -49,6 +49,19 @@ export const login = async (req, res, next) => {
     }
 }
 
+export const logout = async (req, res, next) => {
+    try {
+        res.clearCookie('Bearer', { httpOnly: true })
+            .clearCookie('access_token', { httpOnly: true })
+            .status(200)
+            .json({ message: "User logged out successfully" });
+    } catch (error) {
+        next(error);
+    }
+};
+
+
+
 export const google = async (req, res, next) => {
     try {
         const user = await User.findOne({ email: req.body.email });
