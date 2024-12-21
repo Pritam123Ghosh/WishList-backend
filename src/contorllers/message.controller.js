@@ -79,7 +79,12 @@ export const getAllMessages = async (req, res) => {
             return res.status(401).json({ message: "Unauthorized" });
         }
 
-        const messages = await Message.find({ userID: req.user._id }).sort({ createdAt: -1 });
+        // Fetch messages excluding those where isAchieved is true
+        const messages = await Message.find({
+            userID: req.user._id,
+            isAchieved: { $ne: true } // Exclude messages with isAchieved === true
+        }).sort({ createdAt: -1 });
+
         res.status(200).json({ data: messages, message: "All messages fetched successfully" });
     } catch (error) {
         res.status(500).json({ message: "Error fetching messages", error });
