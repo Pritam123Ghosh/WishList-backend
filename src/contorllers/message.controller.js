@@ -257,7 +257,7 @@ export const achieveMessage = async (req, res) => {
 
 export const reactedMessage = async (req, res) => {
     try {
-        const { id } = req.parrams;
+        const { id } = req.params;
         if (!req.user) {
             return res.status(401).json({ message: "Unauthorized" });
         }
