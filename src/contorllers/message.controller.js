@@ -255,6 +255,27 @@ export const achieveMessage = async (req, res) => {
     }
 };
 
+export const reactedMessage = async (req, res) => {
+    try {
+        const { id } = req.parrams;
+        if (!req.user) {
+            return res.status(401).json({ message: "Unauthorized" });
+        }
+        const message = await Message.findOne({ _id: id });
+        if (!message) {
+            return res.status(404).json({ message: "Message not found" });
+        }
+        message.isReacted = true;
+        const updatedMessage = await message.save();
+        res.status(200).json({
+            message: "Wish marked as reacted successfully",
+            data: updatedMessage,
+        });
+    } catch (error) {
+        res.status(500).json({ message: "Error marking wish as reacted", error });
+    }
+};
+
 
 export const getAchievedMessages = async (req, res) => {
     try {

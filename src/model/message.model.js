@@ -19,6 +19,10 @@ const MessageSchema = new mongoose.Schema({
         type: Boolean,
         default: false, // Default is unachieved
     },
+    isReacted: {
+        type: Boolean,
+        default: false, // Default is unreacted
+    }
 
 }, { timestamps: true });
 

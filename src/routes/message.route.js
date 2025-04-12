@@ -1,5 +1,5 @@
 import express from "express";
-import { achieveMessage, createMessage, deleteMessage, getAchievedMessages, getAllMessages, getMessage, updateMessage } from "../contorllers/message.controller.js";
+import { achieveMessage, createMessage, deleteMessage, getAchievedMessages, getAllMessages, getMessage, reactedMessage, updateMessage } from "../contorllers/message.controller.js";
 import { protect } from "../middleware/auth.middleware.js";
 const router = express.Router()
 
@@ -9,5 +9,6 @@ router.get("/getMessage/:id", protect, getMessage); // Get a specific message by
 router.put("/updateMessage/:id", protect, updateMessage); // Update a message
 router.delete("/deleteMessage/:id", protect, deleteMessage); // Delete a message
 router.put("/achieve/:id", protect, achieveMessage);
+router.put("/reacted/:id", protect, reactedMessage);
 router.get("/achieved", protect, getAchievedMessages);
 export default router;
