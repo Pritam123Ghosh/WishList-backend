@@ -258,6 +258,7 @@ export const achieveMessage = async (req, res) => {
 export const reactedMessage = async (req, res) => {
     try {
         const { id } = req.params;
+        const { isReacted } = req.body;
         if (!req.user) {
             return res.status(401).json({ message: "Unauthorized" });
         }
@@ -265,7 +266,7 @@ export const reactedMessage = async (req, res) => {
         if (!message) {
             return res.status(404).json({ message: "Message not found" });
         }
-        message.isReacted = true;
+        message.isReacted = isReacted;
         const updatedMessage = await message.save();
         res.status(200).json({
             message: "Wish marked as reacted successfully",
