@@ -1,0 +1,44 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+enum MessageRole {
+  he
+  she
+}
+
+model User {
+  id            Int       @id @default(autoincrement())
+  username      String    @unique @db.VarChar(100)
+  email         String    @unique @db.VarChar(255)
+  password      String    @db.VarChar(255)
+  avatar String @default("https://i.pinimg.com/736x/68/69/7e/68697ed39e4b7df530c3a61c1853b81a.jpg") @db.VarChar(255)
+  legacyMongoId String?   @unique @db.VarChar(50)
+  messages      Message[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@map("users")
+}
+
+model Message {
+  id            Int         @id @default(autoincrement())
+  userId        Int
+  text          String      @db.Text
+  role          MessageRole
+  isAchieved    Boolean     @default(false)
+  isReacted     Boolean     @default(false)
+  legacyMongoId String?     @unique @db.VarChar(50)
+  user          User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  @@index([userId])
+  @@index([userId, role])
+  @@index([userId, isAchieved])
+  @@map("messages")
+}
